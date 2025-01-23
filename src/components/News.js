@@ -78,7 +78,8 @@ const capitalizeFirstLetter = (string) => {
   }
  const fetchMoreData = async() => {
     setPage(page+1);
-  const url= `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+    const url= `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
+    setPage(page+1);
     const data = await fetch(url);
     const parsedData = await data.json();
     setArticles(articles.concat(parsedData.articles));
@@ -89,7 +90,7 @@ const capitalizeFirstLetter = (string) => {
   
     return (
       <>
-        <h1 className="text-center p-5">Newsly-Top {capitalizeFirstLetter(props.category)} Headlines</h1>
+        <h1 className="text-center p-5" style={{margin:'35px 0px', marginTop:'90px'}}>Newsly-Top {capitalizeFirstLetter(props.category)} Headlines</h1>
       {loading && <Spinner/>}
       <InfiniteScroll
           dataLength={articles.length}
